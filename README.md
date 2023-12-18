@@ -1,69 +1,26 @@
-# Building WRIMS from this repo
-The working buid system as of December 2023 uses a mixture of Java 6 and Java 8 in Eclipse Luna SR2 (v 4.4.2 - Februay 2015) 
-with support for plugin development. The build evironment requires a very specific setup
+# WRIMS: Water Resource Integrated Modeling System
+a generalized water resources modeling system for evaluating operational alternatives of large, complex river basins. WRIMS integrates a simulation language for flexible operational criteria specification, a linear programming solver for efficient water allocation decisions, and graphics capabilities for ease of use. These combined capabilities provide a comprehensive and powerful modeling tool for water resource systems simulation.
+- https://water.ca.gov/Library/Modeling-and-Analysis/Modeling-Platforms/Water-Resource-Integrated-Modeling-System
 
+## WRIMS with HEC-DSS version 7 library
+We are modernizing WRIMS and its development. This work updates WRIMS dependencies on HEC-DSS, the US Army Corps of 
+Engineers data storage system. This allows WRIMS to read and write files using version 7 of the DSS data format. It 
+is also a step toward devOps-style development, automating the integration of HEC-DSS libraries from HEC's artifact 
+management system, rather than relying on manual updates or building locally from source.
 
-- The git repository must be located in "D:\cvwrsm\trunk
-  - You may need to create the D: or J: drive with the Windows "subst" command if you don't have a
-physical D: drive.
-  - Clone RMA's GitHub repo for CVWRSM (https://github.com/rmanet/cvwrsm.git) to your PC. No special location is required; follow your usual practice for git repositories if you have one.
-  - Recommend that you create "trunk" as a symbolic link from wherever you cloned the repo to on your computer to the above. Here's the command that does that:
-    - `D:\cvwrsm>mklink /D trunk D:\VCS\github.com\cvwrsm`
-    - Your target will not be the same as this ^^^
-    - You will need admin privileges on your PC to run this command.
-    - The link was successfully created if your git client sees D:\cvwrsm\trunk as a git repo.
-  - From your git client, check out the "Feature/HecDSS7" branch of cvwrsm.<br>(Command-line: `git checkout Feature/HecDSS7`)
-- The Eclipse IDE can be installed in "D:\eclipse-rcp-luna-SR2-win32-x86_64"
-  - It's important to use a copy of the Eclipse IDE that's installed from the .zip (or .7z) file that DWR provided, because it contains components of the WRIMS install that aren't part of the Eclipse workspace or the git repo.
-    - For reference, the IDE itself (with OGSi plugin development tools) can be found in the Eclipse archives at
-      - https://www.eclipse.org/downloads/packages/release/luna/r/eclipse-rcp-and-rap-developers
-- The Eclipse workspace must be located in "D:\dev_luna_x64"
-  - dev_luna_x64.zip --> D:\dev_luna_x64<br>
-  -  ^^^ The Eclipse workspace for WRIMS, as provided by DWR (may be .7z of .zip file)
-- Install the contents of this 7-zip archive as you choose. J:\DWR
-  - _SampleDSS_CalSimII.7z  --> J:\DWR\_SampleDSS_CalSimII (for example)
+## An evolving build system
+WRIMS can be built from this repository following the procedure described [here](./README.build.md).<br>
+As part of the movement toward devOps development, dependency analyses and proposals for re-organization of the 
+build have been added as README files within components of this repository.
 
-With the above steps completed, launch Eclipse from D:\eclipse-rcp-luna-SR2-win32-x86_64\eclipse\eclipse.exe
+## WRIMS GUI dependencies
+The WRIMS GUI is a plugin to Eclipse's Equinox RCP (Rich Client Platform). Its components include the packages 
+listed below, with indicated dependencies on other packages managed here (i.e. excluding external jars from java, 
+eclipse, etc.)
 
-In Eclipse:
-- From the "Package Explorer" panel, right-click and select "import," to open the import wizard.
-  - Choose the option "Existing Projects into Workspace" and press the "Next" button.
-  - Browse to D:\cvwrsm\trunk and import the project `mil.army.usace.hec-dependencies`
+![](./wrims_gui.png)
 
-- Close all projects in the Package Explorer except
-	- `mil.army.usace.hec-dependencies`
-	- `gov.ca.dwr.hecdssvue`
-	- `gov.ca.dwr.jdiagram`
-	- `wrimsv2_plugin`
-
-- Select `mil.army.usace.hec-dependencies` in the package explorer, then , from the project menu, run "Clean..." and "Build Project"
-  - You may have to refresh (from right-click menu on its entry in the Package Explorer) and rebuild this project to get a clean build.
-
-- Select `wrimsv2_plugin` project in the Package Explorer and select Build Path=>Configure Build Path... from the right-click menu. If the JRE System Library is "unbound" in the dialog that follows, select it, and click the Edit... button. Select the workspace default JRE, and close the dialogs.
-
-- From the project menu, run "Clean..." followed by "Build All"
-
-- In `wrimsv2_plugin`, select WRIMS2_plugin.launch and pick Run As=>WRIMS2_plugin from the right-click menu. 
-- This launches the WRIMS application. You'll see an Eclipse splash screen, and some messages in the console window. The WRIMS app should run in spite of the messages.
-
-In WRIMS, these steps will verify that the build was successful:
-
-- Close the Welcome tab to uncover the WRIMS features.
-
-- From the Windows menu, select "Open Perspective"=>Other... and pick "DSS" from the list
-- From the Windows menu, select "Open Perspective"=>Other... and pick "CalSimHydro" from the list
-
-- Activate the "DSS" perspective in the upper-right corner of the app (below the menu bar).
-
-- In the bottom panel, select the "DSS Files Compare" tab, and press the "Open Project" button.
-- Browse to and select the project file "J:\DWR\_sampleDSS\CalSimII\test.dsv"
-
-NOTES:
-
-1. The Eclipse IDE can be installed anywhere. The first time you launch Eclipse Luna, it will 
-create a default workspace that isn't the one you need for the WRIMS build, but you can switch to another. From Eclipse's File menu, select "Switch Workspace" and navigate to D:\dev_luna_x64.
-
-2. The Eclipse framework that WRIMS plugs in to is launched from the IDE install folder. 
-The CalSim executables have been installed in that folder as well. WRIMS launches the CalSim 
-programs from that location, and that appears to work even if the IDE is not installed on the D: 
-drive. Tests were successful, but not exhaustive.
+- [gov.ca.dwr.jdiagram](./gov.ca.dwr.jdiagram/README.md)
+- [gov.ca.dwr.hecdssvue](./gov.ca.dwr.hecdssvue/README.md)
+- [wrimsv2_plugin](./wrims_v2/wrimsv2_plugin/README.md)
+- [WRIMSv2](./wrims_v2/wrims_v2/README.md)
