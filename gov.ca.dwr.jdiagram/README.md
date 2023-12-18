@@ -118,4 +118,3 @@ dropins\gov.ca.dwr.jdiagram_1.0.0.0.jar
 - gov.ca.dwr.jdiagram.views                          -> wrimsv2_plugin.debugger.exception                  wrimsv2_plugin_1.0.0.0.jar
 - gov.ca.dwr.jdiagram.views                          -> wrimsv2_plugin.debugger.model                      wrimsv2_plugin_1.0.0.0.jar
 - gov.ca.dwr.jdiagram.views                          -> wrimsv2_plugin.tools                               wrimsv2_plugin_1.0.0.0.jar
-- `
