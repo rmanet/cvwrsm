@@ -1,0 +1,82 @@
+
+plugins{
+    id 'java'
+    id 'antlr'
+}
+
+group 'gov.ca.dwr'
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        url "https://oss.sonatype.org/content/repositories/releases"
+    }
+    maven {
+        url 'https://www.hec.usace.army.mil/nexus/repository/maven-public'
+    }
+    mavenCentral()
+}
+
+sourceSets {
+    src {
+        java{
+            srcDir "src/main/java/wrimsv2"
+        }
+        antlr{
+            srcDir "src/main/antlr/wrimsv2"
+        }
+    }
+}
+
+dependencies {
+    antlr "org.antlr:antlr:3.5.2" // use ANTLR version 3
+    implementation 'com.google.guava:guava:11.0.2'
+    implementation 'commons-io:commons-io:2.1'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.3'
+    implementation 'org.javatuples:javatuples:1.2'
+    implementation 'de.danielbechler:java-object-diff:0.95'
+    implementation 'org.testng:testng:6.3'
+    // implementation 'org.hdfgroup:hdf-java:2.11'
+    // kyro distribution is not available in maven central?
+    // implementation 'com.esotericsoftware.kryo:kyro:2.24.0'
+    implementation files('lib/kryo-2.24.0.jar')
+    implementation files('lib_x64/jep-3.8.2.jar')
+    implementation files('lib_x64/jarhdf5-2.11.0.jar')
+    implementation files('lib_x64/jarhdfobj.jar')
+    implementation files('lib_x64/jarh5obj.jar')
+    implementation files('lib_x64/libtensorflow-1.14.0.jar')
+    implementation files('lib/com.google.ortools.linearsolver.jar')
+    implementation files('lib/coinor.jar')
+    implementation files('lib/gurobi.jar')
+    implementation files('lib/lpsolve55j.jar')
+    implementation files('lib/XAOptimizer.jar')
+    implementation project(':mil-army-usace-hec-dependencies')
+}
+
+// This moves .tokens files into the same generated-src files with the .java files
+tasks.withType(AntlrTask) {
+    println ("task name: " + name)
+    if (name.startsWith('generate')) {
+        doLast {
+            println("// Copying .tokens files to corresponding java folders")
+            copy {
+                from "${buildDir}/generated-src/antlr/main"
+                include '*Evaluator*.tokens'
+                into "${buildDir}/generated-src/antlr/main/wrimsv2/evaluator/"
+            }
+            copy {
+                from "${buildDir}/generated-src/antlr/main"
+                include 'WreslTree*.tokens'
+                into "${buildDir}/generated-src/antlr/main/wrimsv2/wreslparser/grammar/"
+            }
+            copy{
+                from "${buildDir}/generated-src/antlr/main"
+                include 'IncFileFinder.tokens'
+                include 'WreslPlus.tokens'
+                into "${buildDir}/generated-src/antlr/main/wrimsv2/wreslplus/grammar/"
+            }
+            delete "${buildDir}/generated-src/antlr/main/*.tokens"
+        }
+    }
+}
+

@@ -1,0 +1,3 @@
+rootProject.name = 'wrims_v2-multiproject'
+include 'mil-army-usace-hec-dependencies'
+include 'wrims_v2'
