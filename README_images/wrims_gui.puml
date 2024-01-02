@@ -1,0 +1,29 @@
+@startuml
+
+package wrimsv2_plugin <<folder>> {
+}
+package gov.ca.dwr.hecdssvue <<folder>> {
+}
+package gov.ca.dwr.jdiagram <<folder>> {
+}
+package calsim <<folder>> {
+}
+package wrims_v2 <<folder>> {
+}
+package dsm2_input_model <<folder>> {
+}
+package vista <<folder>>{
+}
+package hec <<folder>>{
+}
+gov.ca.dwr.jdiagram +-- wrimsv2_plugin
+gov.ca.dwr.jdiagram +-- gov.ca.dwr.hecdssvue
+gov.ca.dwr.hecdssvue +-- wrimsv2_plugin
+gov.ca.dwr.hecdssvue +-- calsim
+gov.ca.dwr.hecdssvue +-- vista
+wrimsv2_plugin +-- wrims_v2
+wrimsv2_plugin +-- hec
+wrimsv2_plugin +-- dsm2_input_model
+wrims_v2 +-- vista
+
+@enduml
