@@ -18,7 +18,7 @@ The WRIMS GUI is a plugin to Eclipse's Equinox RCP (Rich Client Platform). Its c
 listed below, with indicated dependencies on other packages managed here (i.e. excluding external jars from java, 
 eclipse, etc.)
 
-![](./wrims_gui.png)
+![](./README_images/wrims_gui.png)
 
 - [gov.ca.dwr.jdiagram](./gov.ca.dwr.jdiagram/README.md)
 - [gov.ca.dwr.hecdssvue](./gov.ca.dwr.hecdssvue/README.md)

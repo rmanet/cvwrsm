@@ -1,4 +1,4 @@
-# Building WRIMS from this repo
+# Building wrimsv2_plugin from this repo
 The working build system as of December 2023 uses a mixture of Java 6 and Java 8 in Eclipse Luna SR2 
 (v 4.4.2 - Februay 2015) with support for plugin development. 
 
@@ -41,10 +41,21 @@ In Eclipse:
 	- `mil.army.usace.hec-dependencies`
 	- `gov.ca.dwr.hecdssvue`
 	- `gov.ca.dwr.jdiagram`
+	- `wrims_v2`
 	- `wrimsv2_plugin`
+
+![](./README_images/proj_list.png)
+
+        Note that the `wrims_v2` and `wrimsv2_plugin` projects are located in `D:\cvwrsm\trunk\wrims_v2`
 
 - Select `mil.army.usace.hec-dependencies` in the package explorer, then , from the project menu, run "Clean..." and "Build Project"
   - You may have to refresh (from right-click menu on its entry in the Package Explorer) and rebuild this project to get a clean build.
+
+- Select and expand `wrms_v2` in the package explorer. 
+  - Expand the `launch-Antler`node and run all the launchers
+  - Clean and build the `wrms_2` project
+
+![](./README_images/launch_antlr.png)
 
 - Select `wrimsv2_plugin` project in the Package Explorer and select Build Path=>Configure Build Path... from the right-click menu. If the JRE System Library is "unbound" in the dialog that follows, select it, and click the Edit... button. Select the workspace default JRE, and close the dialogs.
 

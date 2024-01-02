@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="/mil.army.usace.hec-dependencies/build/hecjars/flogger-system-backend-0.5.1.jar"/>
 	<classpathentry kind="lib" path="/mil.army.usace.hec-dependencies/build/hecjars/hec-monolith-3.3.22.jar"/>
 	<classpathentry kind="lib" path="/mil.army.usace.hec-dependencies/build/hecjars/hec-nucleus-metadata-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/wrimsv2_plugin/lib/vista.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
