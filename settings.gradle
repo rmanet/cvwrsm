@@ -1,0 +1,3 @@
+rootProject.name = 'wrims'
+include 'wrims-core'
+include 'wrims_plugin'
